@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Online_Quiz.databaseCon;
 
 namespace Online_Quiz
 {
@@ -13,7 +12,6 @@ namespace Online_Quiz
     {
         static void Main(string[] args)
         {
-            databaseCon.databaseConnect.openConnection();
             menu.startMenu();
         }
     }

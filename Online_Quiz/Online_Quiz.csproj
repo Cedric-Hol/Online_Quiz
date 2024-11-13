@@ -95,11 +95,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\databaseCon.cs" />
+    <Compile Include="Database\DatabaseConnect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quiz\addQuestions.cs" />
     <Compile Include="Quiz\question.cs" />
     <Compile Include="style\menu.cs" />
+    <Compile Include="User\addUser.cs" />
     <Compile Include="User\user.cs" />
   </ItemGroup>
   <ItemGroup>

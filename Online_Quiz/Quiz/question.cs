@@ -22,9 +22,8 @@ namespace Online_Quiz.Quiz
         public int Answer_3 { get => answer_3; set => answer_3 = value; }
         public int Answer_4 { get => answer_4; set => answer_4 = value; }
 
-        public question(int question_id, string quiz_question, int answer_1, int answer_2, int answer_3, int answer_4)
+        public question(string quiz_question, int answer_1, int answer_2, int answer_3, int answer_4)
         {
-            this.question_id = question_id;
             this.quiz_question = quiz_question;
             this.answer_1 = answer_1;
             this.answer_2 = answer_2;

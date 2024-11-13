@@ -14,9 +14,8 @@ namespace Online_Quiz.User
         public int Id { get => user_id; set => user_id = value; }
         public string Username { get => username; set => username = value; }
 
-        public user(int user_id, string username)
+        public user(string username)
         {
-            this.user_id = user_id;
             this.username = username;
         }
     }
