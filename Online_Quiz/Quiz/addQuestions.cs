@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Online_Quiz.style;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Online_Quiz.Quiz
@@ -21,7 +23,21 @@ namespace Online_Quiz.Quiz
                 Console.Write("\r\nWhat would you like to do?:");
                 answer = Convert.ToInt32(Console.ReadLine());
 
-                
+                switch (answer)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        Console.Clear();
+                        menu.startMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Please Select one of the options.");
+                        Thread.Sleep(2000);
+                        break;
+                }
             }
         }
     }
