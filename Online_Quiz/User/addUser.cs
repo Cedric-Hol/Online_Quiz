@@ -29,8 +29,9 @@ namespace Online_Quiz.User
             {
                 case 1:
                     Console.Write("What would you like your username to be?: ");
-                    string username = Console.ReadLine();
-                    addUserToDatabase(new user(username));
+                    user User = new user();
+                    User.Username = Console.ReadLine();
+                    addUserToDatabase(User);
                     break;
                 case 2:
                     Console.Clear();

@@ -14,7 +14,6 @@ namespace Online_Quiz
         {
             menu menuClass = new menu();
             menuClass.showMenu();
-            
         }
     }
 }
