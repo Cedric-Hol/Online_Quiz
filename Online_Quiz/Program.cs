@@ -12,7 +12,9 @@ namespace Online_Quiz
     {
         static void Main(string[] args)
         {
-            menu.startMenu();
+            menu menuClass = new menu();
+            menuClass.showMenu();
+            
         }
     }
 }

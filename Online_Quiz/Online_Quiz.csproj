@@ -102,6 +102,7 @@
     <Compile Include="Quiz\question.cs" />
     <Compile Include="style\menu.cs" />
     <Compile Include="User\addUser.cs" />
+    <Compile Include="User\getUser.cs" />
     <Compile Include="User\user.cs" />
   </ItemGroup>
   <ItemGroup>
