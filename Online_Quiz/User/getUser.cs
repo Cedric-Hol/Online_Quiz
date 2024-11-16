@@ -11,23 +11,24 @@ namespace Online_Quiz.User
 {
     public class getUser
     {
-        public List<user> getUserInfoByUsernname(string username)
+        public List<user> getUserInfo(string username)
         {
             DatabaseConnect db = DatabaseConnect.GetInstance();
-            string query = "SELECT `user_ID`, `username` FROM `users` WHERE username = @username";
+            string query = "SELECT * FROM users WHERE username = @username";
             MySqlCommand cmd = new MySqlCommand(query, db.GetConnection());
             cmd.Parameters.AddWithValue("@username", username);
-            List<user> userInfo = new List<user>();
+            List<user> userData = new List<user>();
             try
             {
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        user userFromdb = new user();
-                        userFromdb.Id = reader.GetInt32(reader.GetOrdinal("user_ID"));
-                        userFromdb.Username = reader.GetString(reader.GetOrdinal("username"));
-                        userInfo.Add(userFromdb);
+                        user user = new user(
+                            reader.GetInt32(reader.GetOrdinal("user_ID")),
+                            reader.GetString(reader.GetOrdinal("username"))
+                            );
+                        userData.Add(user);
                     }
                 }
             }
@@ -35,7 +36,27 @@ namespace Online_Quiz.User
             {
                 Console.WriteLine(ex.Message);
             }
-            return userInfo;
+            return userData;
+        }
+
+        public string getUsername(string username)
+        {
+            List<user> users = getUserInfo(username);
+            foreach (user User in users)
+            {
+                return User.Username;
+            }
+            return "No User Found";
+        }
+
+        public int getUserId(string username)
+        {
+            List<user> users = getUserInfo(username);
+            foreach (user User in users)
+            {
+                return User.Id;
+            }
+            return 0;
         }
     }
 }

@@ -17,5 +17,11 @@ namespace Online_Quiz.User
         public user()
         {
         }
+
+        public user(int id, string username)
+        {
+            Id = id;
+            Username = username;
+        }
     }
 }

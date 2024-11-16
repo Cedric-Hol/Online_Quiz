@@ -17,6 +17,7 @@ namespace Online_Quiz.style
             Console.Clear();
             addQuestions questionMenu = new addQuestions();
             addUser userMenu = new addUser();
+            getUser GetUser = new getUser();
             Console.WriteLine("Welcome to the quiz menu!\r\n");
             Console.WriteLine("1) Make a account.");
             Console.WriteLine("2) Start a quiz.");
@@ -30,10 +31,15 @@ namespace Online_Quiz.style
                     userMenu.addUserMenu();
                     break;
                 case 2:
-                    Console.WriteLine();
                     break;
                 case 3:
-                    questionMenu.addQuestionMenu();
+                    Console.Clear();
+                    Console.WriteLine("What is your username?: ");
+                    string username = Console.ReadLine();
+                    if (GetUser.getUsername(username) == username) 
+                    {
+                        questionMenu.addQuestionMenu(username);
+                    }
                     break;
                 case 4:
                     Environment.Exit(-1);
