@@ -29,6 +29,9 @@ namespace Online_Quiz.style
             {
                 case 1:
                     userMenu.addUserMenu();
+                    Console.WriteLine("User made.... returning to main menu.");
+                    Thread.Sleep(2000);
+                    showMenu();
                     break;
                 case 2:
                     break;

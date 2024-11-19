@@ -5,6 +5,7 @@ using Online_Quiz.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -39,6 +40,12 @@ namespace Online_Quiz.Quiz
                     addQuestionMenu(username);
                     break;
                 case 2:
+                    Console.Clear();
+                    showQuizIdAndName(username);
+                    Console.Write("To What quiz do you want to add a question?: ");
+                    int questionID = Convert.ToInt32(Console.ReadLine());
+                    AddQuestionQuestions(questionID);
+                    addQuestionMenu(username);
                     break;
                 case 3:
                     
@@ -74,9 +81,86 @@ namespace Online_Quiz.Quiz
             }
         }
 
-        public void AddQuestion(string username)
+        public List<quiz> getQuizInfo(string username)
         {
+            DatabaseConnect db = DatabaseConnect.GetInstance();
+            int id = GetUser.getUserId(username);
+            string query = "SELECT * FROM quiz WHERE user_ID = @id";
+            MySqlCommand cmd = new MySqlCommand(query, db.GetConnection());
+            cmd.Parameters.AddWithValue("@id", id);
+            List<quiz> quizData = new List<quiz>();
+            try
+            {
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        quiz quiz = new quiz(
+                            reader.GetInt32(reader.GetOrdinal("quizID")),
+                            reader.GetString(reader.GetOrdinal("quizName"))
+                            );
+                        quizData.Add(quiz);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return quizData;
+        }
 
+        public void showQuizIdAndName(string username)
+        {
+            List<quiz> quizzes = getQuizInfo(username);
+            foreach(quiz Quiz in quizzes)
+            {
+                Console.WriteLine($"{Quiz.QuizID} - {Quiz.QuizName}");
+            }
+        }
+
+        public void AddQuestion(int quizID, question question)
+        {
+            DatabaseConnect db = DatabaseConnect.GetInstance();
+            try
+            {
+                string query = "INSERT INTO `questions` (`quizID`, `question`, `answer_1`, `answer_2`, `answer_3`, `answer_4`, `correct_Answer`) " +
+                                       "VALUES (@quizID, @question, @answer_1, @answer_2, @answer_3, @answer_4, @correct_Answer)";
+
+                using (MySqlCommand command = new MySqlCommand(query, db.GetConnection()))
+                {
+                    command.Parameters.AddWithValue("@quizID", quizID);
+                    command.Parameters.AddWithValue("question", question.Quiz_question);
+                    command.Parameters.AddWithValue("answer_1", question.Answer_1);
+                    command.Parameters.AddWithValue("answer_2", question.Answer_2);
+                    command.Parameters.AddWithValue("answer_3", question.Answer_3);
+                    command.Parameters.AddWithValue("answer_4", question.Answer_4);
+                    command.Parameters.AddWithValue("correct_Answer", question.Correct_answer);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        public void AddQuestionQuestions(int quizID)
+        {
+            question question = new question();
+            Console.Write("What is the question?: ");
+            question.Quiz_question = Console.ReadLine();
+            Console.Write("What is the first answer?: ");
+            question.Answer_1 = Console.ReadLine();
+            Console.Write("What is the second answer?: ");
+            question.Answer_2 = Console.ReadLine();
+            Console.Write("What is the third answer?: ");
+            question.Answer_3 = Console.ReadLine();
+            Console.Write("What is the forth answer?: ");
+            question.Answer_4 = Console.ReadLine();
+            Console.Write("What is the correct answer?: ");
+            question.Correct_answer = Console.ReadLine();
+            AddQuestion(quizID, question);
         }
     }
 }
