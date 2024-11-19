@@ -20,7 +20,7 @@ namespace Online_Quiz.style
             getUser GetUser = new getUser();
             Console.WriteLine("Welcome to the quiz menu!\r\n");
             Console.WriteLine("1) Make a account.");
-            Console.WriteLine("2) Start a quiz.");
+            Console.WriteLine("2) Play a quiz.");
             Console.WriteLine("3) Make a quiz.");
             Console.WriteLine("4) Exit.");
             Console.Write("\r\nWhat would you like to do?:");

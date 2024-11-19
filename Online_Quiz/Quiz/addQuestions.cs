@@ -17,6 +17,7 @@ namespace Online_Quiz.Quiz
     public class addQuestions
     {
         private getUser GetUser = new getUser();
+        private DeleteQuiz deleteQuiz = new DeleteQuiz();
         public void addQuestionMenu(string username)
         {
             Console.Clear();
@@ -48,7 +49,12 @@ namespace Online_Quiz.Quiz
                     addQuestionMenu(username);
                     break;
                 case 3:
-                    
+                    Console.Clear();
+                    Console.WriteLine("What quiz would you like to delete?");
+                    showQuizIdAndName(username);
+                    Console.Write("Wich would you like to delete?: ");
+                    int quizID = Convert.ToInt32(Console.ReadLine());
+                    deleteQuiz.deleteQuiz(quizID);
                     break;
                 case 4:
                     menuClass.showMenu();
