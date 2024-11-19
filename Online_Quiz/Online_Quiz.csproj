@@ -100,6 +100,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quiz\addQuestions.cs" />
     <Compile Include="Quiz\DeleteQuiz.cs" />
+    <Compile Include="Quiz\PlayQuiz.cs" />
     <Compile Include="Quiz\question.cs" />
     <Compile Include="Quiz\quiz.cs" />
     <Compile Include="style\menu.cs" />

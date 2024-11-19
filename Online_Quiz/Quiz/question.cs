@@ -14,7 +14,7 @@ namespace Online_Quiz.Quiz
         private string answer_2;
         private string answer_3;
         private string answer_4;
-        private string correct_answer;
+        private int correct_answer;
 
         public int Question_id { get => question_id; set => question_id = value; }
         public string Quiz_question { get => quiz_question; set => quiz_question = value; }
@@ -22,14 +22,14 @@ namespace Online_Quiz.Quiz
         public string Answer_2 { get => answer_2; set => answer_2 = value; }
         public string Answer_3 { get => answer_3; set => answer_3 = value; }
         public string Answer_4 { get => answer_4; set => answer_4 = value; }
-        public string Correct_answer { get => correct_answer; set => correct_answer = value; }
+        public int Correct_answer { get => correct_answer; set => correct_answer = value; }
 
         public question()
         {
 
         }
 
-        public question(string quiz_question, string answer_1, string answer_2, string answer_3, string answer_4, string correct_answer)
+        public question(string quiz_question, string answer_1, string answer_2, string answer_3, string answer_4, int correct_answer)
         {
             this.quiz_question = quiz_question;
             this.answer_1 = answer_1;

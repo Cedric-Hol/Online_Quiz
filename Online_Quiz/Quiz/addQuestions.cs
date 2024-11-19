@@ -28,8 +28,7 @@ namespace Online_Quiz.Quiz
             Console.WriteLine("3) Delete a quiz.");
             Console.WriteLine("4) Exit.");
             Console.Write("\r\nWhat would you like to do?:");
-            int answer;
-            answer = Convert.ToInt32(Console.ReadLine());
+            int answer = Convert.ToInt32(Console.ReadLine());
 
             switch (answer)
             {
@@ -137,10 +136,10 @@ namespace Online_Quiz.Quiz
                 {
                     command.Parameters.AddWithValue("@quizID", quizID);
                     command.Parameters.AddWithValue("question", question.Quiz_question);
-                    command.Parameters.AddWithValue("answer_1", question.Answer_1);
-                    command.Parameters.AddWithValue("answer_2", question.Answer_2);
-                    command.Parameters.AddWithValue("answer_3", question.Answer_3);
-                    command.Parameters.AddWithValue("answer_4", question.Answer_4);
+                    command.Parameters.AddWithValue("answer_1", $"1) - {question.Answer_1}");
+                    command.Parameters.AddWithValue("answer_2", $"2) - {question.Answer_2}");
+                    command.Parameters.AddWithValue("answer_3", $"3) - {question.Answer_3}");
+                    command.Parameters.AddWithValue("answer_4", $"4) - {question.Answer_4}");
                     command.Parameters.AddWithValue("correct_Answer", question.Correct_answer);
                     command.ExecuteNonQuery();
                 }
@@ -153,6 +152,7 @@ namespace Online_Quiz.Quiz
 
         public void AddQuestionQuestions(int quizID)
         {
+            Console.Clear();
             question question = new question();
             Console.Write("What is the question?: ");
             question.Quiz_question = Console.ReadLine();
@@ -164,8 +164,8 @@ namespace Online_Quiz.Quiz
             question.Answer_3 = Console.ReadLine();
             Console.Write("What is the forth answer?: ");
             question.Answer_4 = Console.ReadLine();
-            Console.Write("What is the correct answer?: ");
-            question.Correct_answer = Console.ReadLine();
+            Console.Write("What is the correct answer 1/2/3/4?: ");
+            question.Correct_answer = Convert.ToInt32(Console.ReadLine());
             AddQuestion(quizID, question);
         }
     }

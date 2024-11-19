@@ -18,6 +18,7 @@ namespace Online_Quiz.style
             addQuestions questionMenu = new addQuestions();
             addUser userMenu = new addUser();
             getUser GetUser = new getUser();
+            PlayQuiz playQuiz = new PlayQuiz();
             Console.WriteLine("Welcome to the quiz menu!\r\n");
             Console.WriteLine("1) Make a account.");
             Console.WriteLine("2) Play a quiz.");
@@ -34,6 +35,8 @@ namespace Online_Quiz.style
                     showMenu();
                     break;
                 case 2:
+                    Console.Clear();
+                    playQuiz.PlayQuizMenu();
                     break;
                 case 3:
                     Console.Clear();
