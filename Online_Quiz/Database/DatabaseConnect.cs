@@ -43,6 +43,9 @@ namespace Online_Quiz.Database
             return _DatabaseConnect;
         }
 
+        //Bowdy: Geen referenties. Onnodig?
+        //Cedric: Deze heb ik voor de zekerheid als ik de Database connectie will sluiten
+        //En deze database classe is een template die ik voor elk project eventueel kan gebruiken.
         public void CloseConnection()
         {
             if (mySqlConnection != null && mySqlConnection.State == System.Data.ConnectionState.Open)

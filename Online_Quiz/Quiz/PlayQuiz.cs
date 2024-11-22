@@ -23,24 +23,37 @@ namespace Online_Quiz.Quiz
             Console.WriteLine("1) Play a quiz.");
             Console.WriteLine("2) Exit to menu");
             Console.Write("Your choice: ");
-            int answer = Convert.ToInt32(Console.ReadLine());
-            switch(answer)
+            string answer = Console.ReadLine();
+
+            //Bowdy:
+            //Kan checken of wat er ingevuld is letters heeft, anders komt er een error
+            //if (int.TryParse(answer, out int result))
+            //Als dit true returned is het een getal
+            //Cedric: het is inderdaad een fijne manier maar er mocht wel een klein beetje meer uitleg bij
+            if (int.TryParse(answer, out int result)) 
             {
-                case 1:
-                    Console.Clear();
-                    showQuizIdAndName();
-                    Console.Write("What quiz would you like to play?: ");
-                    int quizID = Convert.ToInt32(Console.ReadLine());
-                    ShowQuestions(quizID);
-                    break;
-                case 2:
-                    menuClass.showMenu();
-                    break;
-                default:
-                    Console.WriteLine("Please Select one of the options.");
-                    Thread.Sleep(2000);
-                    PlayQuizMenu();
-                    break;
+                switch (result)
+                {
+                    case 1:
+                        Console.Clear();
+                        showQuizIdAndName();
+                        Console.Write("What quiz would you like to play?: ");
+                        int quizID = Convert.ToInt32(Console.ReadLine());
+                        ShowQuestions(quizID);
+                        break;
+                    case 2:
+                        menuClass.showMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Please Select one of the options.");
+                        Thread.Sleep(2000);
+                        PlayQuizMenu();
+                        break;
+                }
+            }
+            else
+            {
+                PlayQuizMenu();
             }
         }
 
@@ -78,6 +91,9 @@ namespace Online_Quiz.Quiz
 
         public void ShowQuestions(int quizID)
         {
+            //Bowdy: Menu's zoals dit worden vaak herhaald. Menus zoals deze en de functie ShowMenu in menu.cs en addQuestionmenu in addQuestions.cs lijken best op elkaar.
+            //Zou het mogelijk zijn om die menu's in 1 functie te zetten?
+
             Console.Clear();
             List<question> listQuestion = PlayChosenQuiz(quizID);
 

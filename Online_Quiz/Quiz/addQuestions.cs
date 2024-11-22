@@ -20,6 +20,9 @@ namespace Online_Quiz.Quiz
         private DeleteQuiz deleteQuiz = new DeleteQuiz();
         public void addQuestionMenu(string username)
         {
+            //Bowdy: Menu's zoals dit worden vaak herhaald. Menus zoals deze en de functie ShowMenu in menu.cs en ShowQuestions in PlayQuiz.cs lijken best op elkaar.
+            //Zou het mogelijk zijn om die menu's in 1 functie te zetten?
+            //Cedric:Deze had ik inderdaad beter in een class kunnen doen. maar het is niet echt herhalende informatie.
             Console.Clear();
             menu menuClass = new menu();
             Console.WriteLine("Welcome to the make a quiz menu!\r\n");
@@ -28,41 +31,55 @@ namespace Online_Quiz.Quiz
             Console.WriteLine("3) Delete a quiz.");
             Console.WriteLine("4) Exit.");
             Console.Write("\r\nWhat would you like to do?:");
-            int answer = Convert.ToInt32(Console.ReadLine());
+            string answer = Console.ReadLine();
 
-            switch (answer)
+
+            //Bowdy:
+            //Kan checken of wat er ingevuld is letters heeft, anders komt er een error
+            //if (int.TryParse(answer, out int result))
+            //Als dit true returned is het een getal
+            if (int.TryParse(answer, out int result))
             {
-                case 1:
-                    Console.Clear();
-                    Console.Write("What would you like your quiz to be named?: ");
-                    string quizName = Console.ReadLine();
-                    MakeAQuiz(quizName, username);
-                    addQuestionMenu(username);
-                    break;
-                case 2:
-                    Console.Clear();
-                    showQuizIdAndName(username);
-                    Console.Write("To What quiz do you want to add a question?: ");
-                    int questionID = Convert.ToInt32(Console.ReadLine());
-                    AddQuestionQuestions(questionID);
-                    addQuestionMenu(username);
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.WriteLine("What quiz would you like to delete?");
-                    showQuizIdAndName(username);
-                    Console.Write("Wich would you like to delete?: ");
-                    int quizID = Convert.ToInt32(Console.ReadLine());
-                    deleteQuiz.deleteQuiz(quizID);
-                    break;
-                case 4:
-                    menuClass.showMenu();
-                    break;
-                default:
-                    Console.WriteLine("Please Select one of the options.");
-                    Thread.Sleep(2000);
-                    addQuestionMenu(username);
-                    break;
+                switch (result)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.Write("What would you like your quiz to be named?: ");
+                        string quizName = Console.ReadLine();
+                        MakeAQuiz(quizName, username);
+                        addQuestionMenu(username);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        showQuizIdAndName(username);
+                        Console.Write("To What quiz do you want to add a question?: ");
+                        int questionID = Convert.ToInt32(Console.ReadLine());
+                        AddQuestionAnswers(questionID);
+                        addQuestionMenu(username);
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("What quiz would you like to delete?");
+                        showQuizIdAndName(username);
+                        Console.Write("Which would you like to delete?: ");
+                        int quizID = Convert.ToInt32(Console.ReadLine());
+                        deleteQuiz.deleteQuiz(quizID);
+                        break;
+                    case 4:
+                        menuClass.showMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Please Select one of the options. Press any key to continue..");
+                        //Bowdy: Thread.Sleep is niet handig want hij leest nog steeds wat er getypt wordt, alleen wordt het niet laten zien.
+                        //Het zou better zijn als de thread sleep helemaal weggehaald wordt
+                        Console.ReadKey();
+                        addQuestionMenu(username);
+                        break;
+                }
+            }
+            else
+            {
+                addQuestionMenu(username);
             }
         }
 
@@ -150,7 +167,9 @@ namespace Online_Quiz.Quiz
             }
         }
 
-        public void AddQuestionQuestions(int quizID)
+        //Bowdy: Ik vind de naamgeving niet helemaal duidelijk hier, ik zou zelf "AddQuestionAnswers" duidelijker vinden.
+        //Cedric: Ik ben het helemaal mee eens
+        public void AddQuestionAnswers(int quizID)
         {
             Console.Clear();
             question question = new question();
@@ -162,7 +181,7 @@ namespace Online_Quiz.Quiz
             question.Answer_2 = Console.ReadLine();
             Console.Write("What is the third answer?: ");
             question.Answer_3 = Console.ReadLine();
-            Console.Write("What is the forth answer?: ");
+            Console.Write("What is the fourth answer?: ");
             question.Answer_4 = Console.ReadLine();
             Console.Write("What is the correct answer 1/2/3/4?: ");
             question.Correct_answer = Convert.ToInt32(Console.ReadLine());
